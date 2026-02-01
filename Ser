@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine</title>
+
+<style>
+body {
+margin: 0;
+height: 100vh;
+background: black;
+overflow: hidden;
+font-family: Arial, sans-serif;
+text-align: center;
+color: lavender;
+}
+
+h1 {
+font-size: 40px;
+margin-top: 120px;
+color: lavender;
+}
+
+/* Floating hearts */
+.heart {
+position: absolute;
+color: lavender;
+font-size: 24px;
+animation: float 6s linear infinite;
+opacity: 0.8;
+}
+
+@keyframes float {
+from { transform: translateY(100vh); opacity: 1; }
+to { transform: translateY(-10vh); opacity: 0; }
+}
+
+button {
+font-size: 22px;
+padding: 15px 30px;
+border-radius: 12px;
+border: none;
+cursor: pointer;
+margin: 10px;
+}
+
+#yes {
+background: lavender;
+color: black;
+}
+
+#no {
+background: white;
+color: black;
+position: absolute;
+}
+
+#photo {
+width: 180px;
+border-radius: 20px;
+margin-top: 20px;
+box-shadow: 0 0 25px lavender;
+}
+
+/* Classy final screen */
+.fade-in {
+animation: fadeIn 2s ease forwards;
+opacity: 0;
+}
+
+@keyframes fadeIn {
+to { opacity: 1; }
+}
+
+.glow {
+text-shadow: 0 0 15px lavender, 0 0 30px lavender;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Will you be my Valentine? 💜</h1>
+
+<img id="photo" src="PUT-YOUR-GOOGLE-DRIVE-LINK-HERE" />
+
+<br><br>
+
+<button id="yes" onclick="yesClicked()">YES</button>
+<button id="no">NO</button>
+
+<!-- Love song -->
+<audio autoplay loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+</audio>
+
+<script>
+const noBtn = document.getElementById("no");
+let size = 22;
+
+// Floating hearts
+setInterval(() => {
+const heart = document.createElement("div");
+heart.className = "heart";
+heart.innerHTML = "💜";
+heart.style.left = Math.random() * window.innerWidth + "px";
+heart.style.fontSize = (20 + Math.random() * 20) + "px";
+document.body.appendChild(heart);
+setTimeout(() => heart.remove(), 6000);
+}, 300);
+
+function moveButton() {
+const x = Math.random() * (window.innerWidth - 100);
+const y = Math.random() * (window.innerHeight - 50);
+noBtn.style.left = x + "px";
+noBtn.style.top = y + "px";
+
+size -= 2;
+if (size > 8) {
+noBtn.style.fontSize = size + "px";
+noBtn.style.padding = "8px 12px";
+}
+}
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("touchstart", moveButton);
+
+function elegantHearts() {
+const heart = document.createElement("div");
+heart.innerHTML = "💜";
+heart.style.position = "absolute";
+heart.style.left = Math.random() * window.innerWidth + "px";
+heart.style.top = window.innerHeight + "px";
+heart.style.fontSize = "26px";
+heart.style.opacity = "0.8";
+heart.style.transition = "transform 6s linear, opacity 6s linear";
+document.body.appendChild(heart);
+
+setTimeout(() => {
+heart.style.transform = "translateY(-120vh)";
+heart.style.opacity = "0";
+}, 10);
+
+setTimeout(() => heart.remove(), 6000);
+}
+
+function yesClicked() {
+document.body.innerHTML = `
+<h1 class="fade-in glow" style="font-size:45px;margin-top:120px;">
+YAY 💜 You made me the happiest person alive!
+</h1>
+<h2 class="fade-in" style="animation-delay:1s;">
+I adore you forever 💞
+</h2>
+`;
+
+setInterval(elegantHearts, 400);
+}
+</script>
+
+</body>
+</html>
